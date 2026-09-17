@@ -10,9 +10,30 @@ const ai = new GoogleGenAI({
   apiKey: api
 });
 
-const interaction = await ai.interactions.create({
+// const interaction = await ai.interactions.create({
+//   model: "gemini-3.8-flash",
+//    input: "Explain how AI works in a few words",
+//   contents:[{
+//     role:"user",
+//     parts:"how are you"
+//   }]
+// });
+
+// console.log(interaction.output_text); 
+
+
+
+const interaction = await ai.models.generateContent({
   model: "gemini-3.8-flash",
-  input: "Explain how AI works in a few words",
+  contents:[{
+    role:"user",
+    parts:[
+      {
+        text:"how are you"
+      }
+    ]
+  }]
 });
 
-console.log(interaction.output_text); 
+
+console.log(interaction.text); 
