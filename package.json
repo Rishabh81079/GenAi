@@ -8,7 +8,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "type": "module",
   "dependencies": {
-    "@google/genai": "^2.21.0"
+    "@google/genai": "^2.21.0",
+    "dotenv": "^17.4.2"
   }
 }
