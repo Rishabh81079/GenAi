@@ -10,30 +10,46 @@ const ai = new GoogleGenAI({
   apiKey: api
 });
 
-// const interaction = await ai.interactions.create({
-//   model: "gemini-3.8-flash",
-//    input: "Explain how AI works in a few words",
-//   contents:[{
-//     role:"user",
-//     parts:"how are you"
-//   }]
-// });
+// async function main() {
+//   const interaction = await ai.interactions.create({
+//     model: "gemini-2.5-flash",
+//     input: "How does AI work?",
+//   });
+//   console.log(interaction.output_text);
+// }
 
-// console.log(interaction.output_text); 
+// const result = await main();
+// console.log(result);
 
 
-
-const interaction = await ai.models.generateContent({
-  model: "gemini-3.8-flash",
-  contents:[{
-    role:"user",
-    parts:[
-      {
-        text:"how are you"
-      }
+async function main(){
+const context = await ai.models.generateContent({
+  model: "gemini-2.5-flash",
+ contents: [
+  {
+    role: "user",
+    parts: [
+      { text: "My name is RJ." }
     ]
-  }]
+  },
+
+  {
+    role: "model",
+    parts: [
+      { text: "Nice to meet you, RJ!" }
+    ]
+  },
+
+  {
+    role: "user",
+    parts: [
+      { text: "What is my name?" }
+    ]
+  }
+]
 });
 
+console.log(context.text); 
+}
 
-console.log(interaction.text); 
+await main();
