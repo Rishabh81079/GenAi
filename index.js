@@ -80,24 +80,39 @@ const ai = new GoogleGenAI({
 
 
 //Ask Question in Console
+// async function main() {
+
+//   const question = readline.question("Hello, What is your Question?\n");
+
+//   const interaction = await ai.interactions.create({
+//     model: "gemini-3.8-flash",
+//     input: `${question} `,
+    
+//        system_instruction: `You are a math tutor 
+//     Strict Rule to Follow
+//     - you will only answer the question which is related to math equations 
+//     - dont answer anything which is not related to math
+//     - rudely reply to user if they ask question which is not related to math
+//     ` 
+//       ,
+    
+//   });
+//   console.log(interaction.output_text);
+// }
+
+// await main();
+
+
+//GIVE ANSWER IN CHUNKS
 async function main() {
-
-  const question = readline.question("Hello, What is your Question?\n");
-
-  const interaction = await ai.interactions.create({
-    model: "gemini-3.8-flash",
-    input: `${question} `,
-    
-       system_instruction: `You are a math tutor 
-    Strict Rule to Follow
-    - you will only answer the question which is related to math equations 
-    - dont answer anything which is not related to math
-    - rudely reply to user if they ask question which is not related to math
-    ` 
-      ,
-    
+  const response = await ai.models.generateContentStream({
+    model: "gemini-2.5-flash",
+    contents: "Explain how AI works",
   });
-  console.log(interaction.output_text);
+
+  for await (const chunk of response) {
+    console.log(chunk.text);
+  }
 }
 
 await main();
