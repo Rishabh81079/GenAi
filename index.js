@@ -104,17 +104,45 @@ const ai = new GoogleGenAI({
 
 
 //GIVE ANSWER IN CHUNKS
+// async function main() {
+//   const response = await ai.models.generateContentStream({
+//     model: "gemini-2.5-flash",
+//     contents: "Explain how AI works",
+//   });
+
+//   for await (const chunk of response) {
+//     console.log(chunk.text);
+//   }
+// }
+
+// await main();
+
+
+//HISTORY - THERE IS NO NEED TO MANUALLY ADD HISTORY
 async function main() {
-  const response = await ai.models.generateContentStream({
-    model: "gemini-2.5-flash",
-    contents: "Explain how AI works",
+  const chat = ai.chats.create({
+    model: "gemini-3.8-flash",
+    history: [
+      {
+        role: "user",
+        parts: [{ text: "Hello" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: "Great to meet you. What would you like to know?" }],
+      },
+    ],
   });
 
-  for await (const chunk of response) {
-    console.log(chunk.text);
-  }
+  const response1 = await chat.sendMessage({
+    message: "I have 2 dogs in my house.",
+  });
+  console.log("Chat response 1:", response1.text);
+
+  const response2 = await chat.sendMessage({
+    message: "How many paws are in my house?",
+  });
+  console.log("Chat response 2:", response2.text);
 }
 
 await main();
-
-
