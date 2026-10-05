@@ -118,31 +118,59 @@ const ai = new GoogleGenAI({
 // await main();
 
 
-//HISTORY - THERE IS NO NEED TO MANUALLY ADD HISTORY
+// //HISTORY - THERE IS NO NEED TO MANUALLY ADD HISTORY
+// async function main() {
+//   const chat = ai.chats.create({
+//     model: "gemini-3.8-flash",
+//     history: [
+//       {
+//         role: "user",
+//         parts: [{ text: "Hello" }],
+//       },
+//       {
+//         role: "model",
+//         parts: [{ text: "Great to meet you. What would you like to know?" }],
+//       },
+//     ],
+//   });
+
+//   const response1 = await chat.sendMessage({
+//     message: "I have 2 dogs in my house.",
+//   });
+//   console.log("Chat response 1:", response1.text);
+
+//   const response2 = await chat.sendMessage({
+//     message: "How many paws are in my house?",
+//   });
+//   console.log("Chat response 2:", response2.text);
+// }
+
+// await main();
+
+
+
+
+//HISTORY + Input from User until exit
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3.8-flash",
-    history: [
-      {
-        role: "user",
-        parts: [{ text: "Hello" }],
-      },
-      {
-        role: "model",
-        parts: [{ text: "Great to meet you. What would you like to know?" }],
-      },
-    ],
+    model: "gemini-2.5-flash",
+    history: [],
   });
 
-  const response1 = await chat.sendMessage({
-    message: "I have 2 dogs in my house.",
-  });
-  console.log("Chat response 1:", response1.text);
+  while(true){
+    console.log(" type 'exit' if you want to exit ");
+    const question = readline.question("ask your question:");
+    
+    if(question == "exit"){
+      break;
+    }
+    const response = await chat.sendMessage({
+      message:question
+    })
+    console.log(response.text);
+    
+  }
 
-  const response2 = await chat.sendMessage({
-    message: "How many paws are in my house?",
-  });
-  console.log("Chat response 2:", response2.text);
+  
 }
-
 await main();
