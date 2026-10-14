@@ -209,7 +209,6 @@ async function weatherInformation({city}) {
 
 
 
-// cryptcurrency wale ki information karke
 
 const cryptoInfo = {
     name:"cryptoCurrency",
@@ -274,12 +273,6 @@ async function runAgent() {
 
         const {name,args} = functionCall;
 
-        // if(name=="cryptoCurrency"){
-        //     const response = await cryptoCurrency(args);
-        // }
-        // else if(name=="weatherInformation"){
-        //     const response = await weatherInformation(args);
-        // }
 
         const response = await toolFunctions[name](args);
 
