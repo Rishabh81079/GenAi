@@ -133,11 +133,11 @@ async function buildWebsite() {
     }
     else{
         break;
-        console.log(result.text);
-        History.push({
-            role:"model",
-            parts:[{text:result.text}]
-        })
+    //     console.log(result.text);
+    //     History.push({
+    //         role:"model",
+    //         parts:[{text:result.text}]
+    //     })
     }
 
     }
@@ -209,3 +209,4 @@ while(true){
 
 
 
+//NOTE : Don't use it because i didn't add command review so if gemini gives the command like delete all files so your all files will be deleated
